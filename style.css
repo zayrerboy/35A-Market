@@ -1,14 +1,23 @@
 /* Set a black background and readable text color */
+:root{
+	--bg: #000000;
+	--text: #ffffff;
+}
+
 html, body {
 	height: 100%;
 	margin: 0;
 }
 
 body {
-	background-color: #000000;
-	color: #ffffff;
-	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+	background-color: var(--bg);
+	color: var(--text);
+	font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	transition: background-color 600ms ease, color 600ms ease;
 }
+
+/* Light mode variables applied on the html element */
+html.light-mode { --bg: #ffffff; --text: #111111; }
 
 /* Utility: ensure links are visible on dark background */
 a { color: #ffffff; }
@@ -69,6 +78,35 @@ a { color: #ffffff; }
 	transition: opacity 520ms ease;
 }
 .info-overlay[aria-hidden="false"] { opacity: 1; pointer-events: none; }
+
+/* mode button (top-left) */
+.mode-btn {
+	position: fixed;
+	left: 1.2rem;
+	top: 0.6rem;
+	z-index: 12000;
+	width: 2.2rem;
+	height: 2.2rem;
+	border-radius: 999px;
+	border: 0;
+	background: #ffffff;
+	display: inline-grid;
+	place-items: center;
+	box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+	padding: 0.15rem;
+}
+.mode-btn img { width: 1.2rem; height: 1.2rem; display:block; }
+
+/* when in light-mode, tint the mode icon's circle slightly */
+html.light-mode .mode-btn { background: #f3f3f3; }
+
+/* lighten shadows in light mode for a softer look */
+html.light-mode .mode-btn,
+html.light-mode .info-btn,
+html.light-mode .info-whatsapp,
+html.light-mode .whatsapp-link {
+	box-shadow: 0 3px 6px rgba(0,0,0,0.08) !important;
+}
 
 /* prevent page scroll when overlay open */
 html.no-scroll { overflow: hidden; }
