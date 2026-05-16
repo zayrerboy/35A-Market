@@ -108,6 +108,12 @@ html.light-mode .whatsapp-link {
 	box-shadow: 0 3px 6px rgba(0,0,0,0.08) !important;
 }
 
+/* Reduce image drop-shadow intensity in light mode by ~70% */
+html.light-mode .snap-item.in-view img {
+	/* original drop-shadow: 0 18px 34px rgba(0,0,0,0.6) */
+	filter: brightness(1.04) drop-shadow(0 5.4px 10.2px rgba(0,0,0,0.18));
+}
+
 /* prevent page scroll when overlay open */
 html.no-scroll { overflow: hidden; }
 
@@ -254,15 +260,18 @@ html {
     .snap-item.extra-pad { padding: 1.25rem 0; }
 }
 
-/* subtle in-view animation: start slightly smaller, grow to 100% when visible */
+/* amplified in-view animation: start much smaller, expand noticeably when visible */
 .snap-item img {
-	transform: scale(0.95);
-	transition: transform 420ms cubic-bezier(.2,.8,.25,1), filter 320ms ease, opacity 220ms ease;
-	will-change: transform, filter;
+	transform-origin: center center;
+	transform: scale(0.6) translateZ(0);
+	opacity: 0.6;
+	transition: transform 560ms cubic-bezier(.15,.9,.25,1), filter 420ms ease, opacity 420ms ease;
+	will-change: transform, filter, opacity;
 }
 .snap-item.in-view img {
-	transform: scale(1.03);
-	filter: brightness(1.06) drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+	transform: scale(1.08) translateZ(0);
+	opacity: 1;
+	filter: brightness(1.08) drop-shadow(0 18px 34px rgba(0,0,0,0.6));
 }
 
 /* WhatsApp link monospace styling */
