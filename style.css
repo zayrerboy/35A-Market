@@ -27,6 +27,112 @@ a { color: #ffffff; }
 	transition: transform 200ms ease, opacity 200ms ease;
 }
 
+/* Info button top-right */
+.info-btn {
+	position: fixed;
+	right: 1.2rem; /* a bit more space from the right edge */
+	top: 0.6rem;
+	z-index: 12000;
+	width: 2.2rem;
+	height: 2.2rem;
+	border-radius: 999px;
+	border: 0;
+	background: #ffffff; /* inverted: white circle */
+	color: #111111; /* dark i */
+	font-weight: 700;
+	font-style: italic;
+	font-family: Georgia, 'Times New Roman', Times, serif; /* serif font */
+	font-size: 1.05rem;
+	cursor: pointer;
+	display: inline-grid;
+	place-items: center; /* ensure the i is centered */
+	box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+	padding: 0.15rem; /* a little breathing room inside the circle */
+	line-height: 1;
+}
+.info-btn:active { transform: translateY(1px); }
+
+/* Overlay */
+.info-overlay {
+	position: fixed;
+	inset: 0;
+	/* light red backdrop at ~40% opacity */
+	background: rgba(255,100,100,0.4);
+	-webkit-backdrop-filter: blur(4px) saturate(105%);
+	backdrop-filter: blur(4px) saturate(105%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 11999;
+	opacity: 0;
+	pointer-events: none; /* allow underlying page scrolling */
+	transition: opacity 520ms ease;
+}
+.info-overlay[aria-hidden="false"] { opacity: 1; pointer-events: none; }
+
+/* prevent page scroll when overlay open */
+html.no-scroll { overflow: hidden; }
+
+.info-card {
+	/* remove inner box — plain overlay only */
+	background: transparent;
+	color: #fff;
+	padding: 0.6rem 0.6rem; /* bring text closer to edges */
+	border-radius: 0;
+	width: calc(100% - 1rem);
+	max-width: none;
+	position: relative;
+	text-align: left;
+	box-shadow: none;
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+	transform: translateY(6px) scale(0.998);
+	transition: transform 520ms cubic-bezier(.2,.8,.25,1), opacity 520ms ease;
+	opacity: 0.98;
+	pointer-events: auto; /* allow interaction inside card */
+	margin: 0 0.5rem; /* small gap to screen edges */
+	font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+.info-overlay[aria-hidden="false"] .info-card { transform: translateY(0) scale(1); opacity: 1; }
+.info-content { padding-top: 0.6rem; }
+.info-row { margin: 0.9rem 0; }
+.info-label { font-size: 0.72rem; opacity: 0.92; }
+.info-value { font-size: 1.15rem; font-weight: 700; margin-top: 0.1rem; }
+.info-map {
+	color: #1e90ff;
+	display: inline-block;
+	/* match the small label size and add breathing room */
+	font-size: 0.72rem;
+	margin-top: 0.35rem;
+}
+
+@media (max-width: 480px) {
+	.info-card { padding: 0.8rem; }
+	.info-value { font-size: 1rem; }
+}
+
+/* WhatsApp confirm button inside overlay */
+.info-whatsapp {
+	display: inline-block;
+	margin-top: 0.6rem;
+	/* similar visual to footer chat link but larger and without green */
+	background: rgba(255,255,255,0.06);
+	color: #ffffff;
+	text-decoration: none;
+	padding: 0.6rem 1rem;
+	border-radius: 8px;
+	font-weight: 700;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+	letter-spacing: 0.02em;
+	box-shadow: 0 8px 18px rgba(0,0,0,0.28);
+}
+.info-whatsapp:active { transform: translateY(1px); }
+.info-whatsapp:hover { filter: brightness(0.96); }
+
+@media (max-width: 480px) {
+	.info-whatsapp { padding: 0.45rem 0.75rem; font-size: 0.98rem; }
+}
+
 /* Optional spacing so page content doesn't sit under the logo */
 main, .content {
 	padding-top: calc(2.5em + 2.5rem);
@@ -120,12 +226,13 @@ html {
 /* WhatsApp link monospace styling */
 .whatsapp-link {
 	display: inline-block;
-	margin-top: 0.5rem;
 	color: #ffffff;
 	text-decoration: none;
 	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
 	font-size: 0.8rem;
 	letter-spacing: 0.02em;
+	line-height: 1;
+	padding: 0;
 }
 .whatsapp-link:focus, .whatsapp-link:hover { text-decoration: underline; }
 

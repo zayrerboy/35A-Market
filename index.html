@@ -11,6 +11,7 @@
     <body>
         <img src="images/35A-Market-Logo-White.png" class="site-logo"
             alt="35A Market logo">
+                <button id="info-btn" class="info-btn" aria-label="Info">i</button>
 
         <div class="image-grid" aria-label="Site images">
             <div class="snap-item"><img src="images/cover.png"
@@ -19,27 +20,52 @@
                     alt="Letter"></div>
             <div class="snap-item"><img src="images/vendors_information.png"
                     alt="Vendors information"></div>
-                <div class="snap-item"><img src="images/venue_details.png"
+            <div class="snap-item"><img src="images/venue_details.png"
                     alt="Venue details"></div>
-
-                    <div class="snap-item extra-pad"><img src="images/event_photo/image1.JPG" alt="image 1"></div>
-                    <div class="snap-item extra-pad"><img src="images/event_photo/image2.JPG" alt="image 2"></div>
-                    <div class="snap-item extra-pad"><img src="images/event_photo/image3.JPG" alt="image 3"></div>
-                    <div class="snap-item extra-pad"><img src="images/event_photo/image4.JPG" alt="image 4"></div>
-                    <div class="snap-item extra-pad"><img src="images/event_photo/image5.JPG" alt="image 5"></div>
-                    <div class="snap-item extra-pad"><img src="images/event_photo/image6.JPG" alt="image 6"></div>
-                    <div class="snap-item extra-pad"><img src="images/event_photo/image7.JPG" alt="image 7"></div>
-                    <div class="snap-item extra-pad"><img src="images/event_photo/image8.JPG" alt="image 8"></div>
-
-                <div class="snap-item">
+            <div class="snap-item extra-pad"><img
+                    src="images/event_photo/image1.JPG" alt="image 1"></div>
+            <div class="snap-item extra-pad"><img
+                    src="images/event_photo/image2.JPG" alt="image 2"></div>
+            <div class="snap-item extra-pad"><img
+                    src="images/event_photo/image3.JPG" alt="image 3"></div>
+            <div class="snap-item extra-pad"><img
+                    src="images/event_photo/image4.JPG" alt="image 4"></div>
+            <div class="snap-item extra-pad"><img
+                    src="images/event_photo/image5.JPG" alt="image 5"></div>
+            <div class="snap-item extra-pad"><img
+                    src="images/event_photo/image6.JPG" alt="image 6"></div>
+            <div class="snap-item extra-pad"><img
+                    src="images/event_photo/image7.JPG" alt="image 7"></div>
+            <div class="snap-item extra-pad"><img
+                    src="images/event_photo/image8.JPG" alt="image 8"></div>
+            <div class="snap-item">
                 <img src="images/application_details.png"
                     alt="Application details">
-                </div>
+            </div>
+            <div class="snap-item extra-pad"><img
+                    src="images/event_photo/image9.JPG" alt="image 9"></div>
+
         </div>
         <div id="scroll-progress" aria-hidden="true"></div>
 
+                <div id="info-overlay" class="info-overlay" role="dialog" aria-hidden="true" aria-labelledby="info-title">
+                        <div class="info-card">
+                                <div class="info-content">
+                                        <div class="info-row"><div class="info-label">Date</div><div class="info-value">26th July 2026</div></div>
+                                        <div class="info-row"><div class="info-label">Time</div><div class="info-value">1PM to 9PM</div></div>
+                                        <div class="info-row"><div class="info-label">Location</div><div class="info-value">35A Kampung Bahru Singapore 169355</div></div>
+                                                <div class="info-row"><a class="info-map" href="https://www.google.com/maps/search/?api=1&query=35A+Kampung+Bahru+Singapore+169355" target="_blank" rel="noopener noreferrer">Open in Google Maps</a></div>
+                                                <div class="info-row"><div class="info-label">Booth Fee</div><div class="info-value">SGD $200</div></div>
+                                                <div class="info-row"><div class="info-label">Application Deadline</div><div class="info-value">June 9th</div></div>
+                                                <div class="info-row"><a class="info-whatsapp" href="https://wa.me/91266788" target="_blank" rel="noopener noreferrer">Chat on WhatsApp to confirm</a></div>
+                                </div>
+                        </div>
+                </div>
+
         <footer class="site-footer">
-            <a class="whatsapp-link" href="https://wa.me/91266788" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">Chat on WhatsApp</a>
+            <a class="whatsapp-link" href="https://wa.me/91266788"
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Chat on WhatsApp">Chat on WhatsApp</a>
         </footer>
 
         <script>
@@ -75,5 +101,16 @@
         updateProgress();
     })();
     </script>
+        <script>
+        (function(){
+                const infoBtn = document.getElementById('info-btn');
+                const overlay = document.getElementById('info-overlay');
+                function openInfo(){ overlay.setAttribute('aria-hidden','false'); }
+                function closeInfo(){ overlay.setAttribute('aria-hidden','true'); }
+                function toggleInfo(){ if (overlay.getAttribute('aria-hidden') === 'true') openInfo(); else closeInfo(); }
+                infoBtn && infoBtn.addEventListener('click', toggleInfo);
+                // only toggle via the info button; do not close on backdrop click or ESC
+        })();
+        </script>
     </body>
 </html>
