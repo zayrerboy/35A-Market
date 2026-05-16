@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/x-icon"
+            href="images/35A-Market-Logo-White.png">
+        <title>35A Market 2026</title>
+    </head>
+    <body>
+        <img src="images/35A-Market-Logo-White.png" class="site-logo"
+            alt="35A Market logo">
+
+        <div class="image-grid" aria-label="Site images">
+            <div class="snap-item"><img src="images/cover.png"
+                    alt="cover"></div>
+            <div class="snap-item"><img src="images/letter.png"
+                    alt="Letter"></div>
+            <div class="snap-item"><img src="images/vendors_information.png"
+                    alt="Vendors information"></div>
+                <div class="snap-item"><img src="images/venue_details.png"
+                    alt="Venue details"></div>
+
+                    <div class="snap-item extra-pad"><img src="images/event_photo/image1.JPG" alt="image 1"></div>
+                    <div class="snap-item extra-pad"><img src="images/event_photo/image2.JPG" alt="image 2"></div>
+                    <div class="snap-item extra-pad"><img src="images/event_photo/image3.JPG" alt="image 3"></div>
+                    <div class="snap-item extra-pad"><img src="images/event_photo/image4.JPG" alt="image 4"></div>
+                    <div class="snap-item extra-pad"><img src="images/event_photo/image5.JPG" alt="image 5"></div>
+                    <div class="snap-item extra-pad"><img src="images/event_photo/image6.JPG" alt="image 6"></div>
+                    <div class="snap-item extra-pad"><img src="images/event_photo/image7.JPG" alt="image 7"></div>
+                    <div class="snap-item extra-pad"><img src="images/event_photo/image8.JPG" alt="image 8"></div>
+
+                <div class="snap-item">
+                <img src="images/application_details.png"
+                    alt="Application details">
+                </div>
+        </div>
+        <div id="scroll-progress" aria-hidden="true"></div>
+
+        <footer class="site-footer">
+            <a class="whatsapp-link" href="https://wa.me/91266788" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">Chat on WhatsApp</a>
+        </footer>
+
+        <script>
+    (function (){
+        const progress = document.getElementById('scroll-progress');
+
+        function updateProgress(){
+            const y = window.scrollY || window.pageYOffset;
+            if (y > 10) document.documentElement.classList.add('scrolled'); else document.documentElement.classList.remove('scrolled');
+            const doc = document.documentElement;
+            const height = doc.scrollHeight - window.innerHeight;
+            const pct = height > 0 ? Math.min(100, (y / height) * 100) : 0;
+            if (progress) progress.style.width = pct + '%';
+        }
+
+        // observe snap items and toggle .in-view when they are centered/visible
+        function observeSnapItems(){
+            const items = document.querySelectorAll('.snap-item');
+            if (!items.length || !window.IntersectionObserver) return;
+            const opts = { root: null, rootMargin: '0px', threshold: [0.5, 0.75, 0.9] };
+            const io = new IntersectionObserver((entries)=>{
+                entries.forEach(e=>{
+                    const el = e.target;
+                    if (e.intersectionRatio >= 0.6) el.classList.add('in-view'); else el.classList.remove('in-view');
+                });
+            }, opts);
+            items.forEach(i=>io.observe(i));
+        }
+
+        window.addEventListener('scroll', updateProgress, {passive:true});
+        window.addEventListener('resize', updateProgress);
+        document.addEventListener('DOMContentLoaded', ()=>{ updateProgress(); observeSnapItems(); });
+        updateProgress();
+    })();
+    </script>
+    </body>
+</html>

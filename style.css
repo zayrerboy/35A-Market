@@ -1,0 +1,182 @@
+/* Set a black background and readable text color */
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	background-color: #000000;
+	color: #ffffff;
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Utility: ensure links are visible on dark background */
+a { color: #ffffff; }
+
+/* Pinned logo at the top center */
+.site-logo {
+	position: fixed;
+	top: 0.5rem;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 10em;
+	height: auto;
+	z-index: 9999;
+	pointer-events: none;
+    padding: 1em;
+	transition: transform 200ms ease, opacity 200ms ease;
+}
+
+/* Optional spacing so page content doesn't sit under the logo */
+main, .content {
+	padding-top: calc(2.5em + 2.5rem);
+    padding-bottom: 2rem;
+}
+
+/* Grid display for the other site images */
+.image-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(6rem, 3fr));
+	gap: 1rem;
+	width: min(92%, 960px);
+	margin: 4rem auto 2rem;
+	justify-items: center;
+	align-items: start;
+	padding: 0 1rem;
+}
+
+.image-grid img {
+	width: clamp(3rem, 18vw, 8rem);
+	height: auto;
+	display: block;
+}
+
+@media (max-width: 480px) {
+	.image-grid img {
+		width: calc(3.5 * 18vw);
+		max-width: 92%;
+		height: auto;
+		display: block;
+	}
+	.image-grid {
+		grid-template-columns: 1fr !important;
+		gap: 0.5rem;
+		margin-top: 7rem;
+	}
+}
+
+/* Scroll-snap behaviour for images */
+html {
+	scroll-behavior: smooth;
+	scroll-snap-type: y proximity;
+}
+
+.image-grid {
+	/* allow its children to participate in viewport snap */
+	scroll-snap-type: y proximity;
+}
+
+.snap-item {
+	scroll-snap-align: center;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	/* give a bit of breathing so center snapping looks good */
+	padding: 1rem 0;
+}
+
+/* ensure images inside snap items still follow sizing rules */
+.snap-item img {
+	max-width: 92%;
+	width: auto;
+	height: auto;
+}
+
+@media (max-width: 480px) {
+	.snap-item { padding: 0.5rem 0; }
+	.snap-item img { width: calc(3.5 * 18vw); max-width: 92%; }
+}
+
+/* Larger padding for selected images (image1..image8) */
+.snap-item.extra-pad {
+    padding: 2.5rem 0;
+}
+
+@media (max-width: 480px) {
+    .snap-item.extra-pad { padding: 1.25rem 0; }
+}
+
+/* subtle in-view animation: start slightly smaller, grow to 100% when visible */
+.snap-item img {
+	transform: scale(0.95);
+	transition: transform 420ms cubic-bezier(.2,.8,.25,1), filter 320ms ease, opacity 220ms ease;
+	will-change: transform, filter;
+}
+.snap-item.in-view img {
+	transform: scale(1.03);
+	filter: brightness(1.06) drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
+
+/* WhatsApp link monospace styling */
+.whatsapp-link {
+	display: inline-block;
+	margin-top: 0.5rem;
+	color: #ffffff;
+	text-decoration: none;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+	font-size: 0.8rem;
+	letter-spacing: 0.02em;
+}
+.whatsapp-link:focus, .whatsapp-link:hover { text-decoration: underline; }
+
+/* Footer positioning for WhatsApp link */
+
+.site-footer {
+	position: fixed;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 0.6rem;
+	z-index: 11000;
+	pointer-events: auto;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	/* translucent dark backdrop to keep text readable over images */
+	background: rgba(0,0,0,0.45);
+	-webkit-backdrop-filter: blur(6px) saturate(120%);
+	backdrop-filter: blur(6px) saturate(120%);
+	padding: 0.25rem 0.75rem;
+	border-radius: 8px;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+@media (max-width: 480px) {
+	.site-footer { bottom: 0.5rem; }
+	.whatsapp-link { font-size: 0.78rem; }
+}
+
+/* extra text contrast: subtle stroke + shadow */
+.whatsapp-link {
+	-webkit-text-stroke: 0.3px rgba(0,0,0,0.6);
+	text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+}
+
+/* Scroll progress bar */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: #1e90ff;
+    z-index: 10000;
+    transition: width 120ms linear;
+}
+
+/* Shrink logo slightly when scrolled */
+.scrolled .site-logo {
+    transform: translateX(-50%) scale(0.88);
+    opacity: 0.98;
+}
+
