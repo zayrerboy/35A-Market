@@ -14,6 +14,9 @@ body {
 	color: var(--text);
 	font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	transition: background-color 600ms ease, color 600ms ease;
+	/* improve touch scrolling on iOS */
+	-webkit-overflow-scrolling: touch;
+	-webkit-font-smoothing: antialiased;
 }
 
 /* Light mode variables applied on the html element */
@@ -193,6 +196,10 @@ main, .content {
 	justify-items: center;
 	align-items: start;
 	padding: 0 1rem;
+	/* hint for smoother touch scrolling */
+	-webkit-overflow-scrolling: touch;
+	/* ensure snaps don't place content under the fixed logo */
+	scroll-padding-top: 4.5rem;
 }
 
 .image-grid img {
@@ -219,6 +226,8 @@ main, .content {
 html {
 	scroll-behavior: smooth;
 	scroll-snap-type: y proximity;
+	/* keep some padding when snapping so fixed logo doesn't overlap content */
+	scroll-padding-top: 4.5rem;
 }
 
 .image-grid {
@@ -232,6 +241,8 @@ html {
 	padding: 0 1rem;
 	/* restore scroll-snap participation */
 	scroll-snap-type: y proximity;
+	-webkit-overflow-scrolling: touch;
+	scroll-padding-top: 4.5rem;
 }
 
 .snap-item {
