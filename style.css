@@ -212,16 +212,20 @@ main, .content {
 /* Scroll-snap behaviour for images */
 html {
 	scroll-behavior: smooth;
-	scroll-snap-type: y proximity;
 }
 
 .image-grid {
-	/* allow its children to participate in viewport snap */
-	scroll-snap-type: y proximity;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(6rem, 3fr));
+	gap: 1rem;
+	width: min(92%, 960px);
+	margin: 4rem auto 2rem;
+	justify-items: center;
+	align-items: start;
+	padding: 0 1rem;
 }
 
 .snap-item {
-	scroll-snap-align: center;
 	display: flex;
 	justify-content: center;
 	width: 100%;
