@@ -253,11 +253,22 @@ html {
 
 /* Larger padding for selected images (image1..image8) */
 .snap-item.extra-pad {
-    padding: 2.5rem 0;
+    padding: 3.8rem 0;
 }
 
 @media (max-width: 480px) {
     .snap-item.extra-pad { padding: 1.25rem 0; }
+}
+
+/* Ensure first image sits lower so pinned logo remains visible */
+.image-grid .snap-item:first-child {
+	padding-top: 3.5rem;
+}
+
+@media (max-width: 480px) {
+	.image-grid .snap-item:first-child {
+		padding-top: 6rem;
+	}
 }
 
 /* amplified in-view animation: start much smaller, expand noticeably when visible */
