@@ -280,7 +280,7 @@ html {
 	position: fixed;
 	left: 50%;
 	transform: translateX(-50%);
-	bottom: 0.6rem;
+	bottom: 2rem;
 	z-index: 11000;
 	pointer-events: auto;
 	display: inline-flex;
@@ -297,7 +297,7 @@ html {
 }
 
 @media (max-width: 480px) {
-	.site-footer { bottom: 0.5rem; }
+	.site-footer { bottom: 2rem; }
 	.whatsapp-link { font-size: 0.78rem; }
 }
 
