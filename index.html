@@ -13,10 +13,12 @@
                 <img loading="lazy" src="images/35A-Market-Logo-White.png"
                         class="site-logo"
                         alt="35A Market logo">
+                <!--
                 <button id="mode-btn" class="mode-btn" aria-label="Toggle mode">
                         <img loading="lazy" src="images/light-mode.png"
                                 alt="mode">
                 </button>
+                -->
                 <button id="info-btn" class="info-btn"
                         aria-label="Info">i</button>
 
@@ -133,23 +135,9 @@
             if (progress) progress.style.width = pct + '%';
         }
 
-        // observe snap items and toggle .in-view when they are centered/visible
-        function observeSnapItems(){
-            const items = document.querySelectorAll('.snap-item');
-            if (!items.length || !window.IntersectionObserver) return;
-            const opts = { root: null, rootMargin: '0px', threshold: [0.5, 0.75, 0.9] };
-            const io = new IntersectionObserver((entries)=>{
-                entries.forEach(e=>{
-                    const el = e.target;
-                    if (e.intersectionRatio >= 0.6) el.classList.add('in-view'); else el.classList.remove('in-view');
-                });
-            }, opts);
-            items.forEach(i=>io.observe(i));
-        }
-
         window.addEventListener('scroll', updateProgress, {passive:true});
         window.addEventListener('resize', updateProgress);
-        document.addEventListener('DOMContentLoaded', ()=>{ updateProgress(); observeSnapItems(); });
+        document.addEventListener('DOMContentLoaded', ()=>{ updateProgress(); });
         updateProgress();
     })();
     </script>
@@ -157,29 +145,32 @@
         (function(){
                 const infoBtn = document.getElementById('info-btn');
                 const overlay = document.getElementById('info-overlay');
-                                const modeBtn = document.getElementById('mode-btn');
-                                const siteLogo = document.querySelector('.site-logo');
                 function openInfo(){ overlay.setAttribute('aria-hidden','false'); }
                 function closeInfo(){ overlay.setAttribute('aria-hidden','true'); }
                 function toggleInfo(){ if (overlay.getAttribute('aria-hidden') === 'true') openInfo(); else closeInfo(); }
                 infoBtn && infoBtn.addEventListener('click', toggleInfo);
                 // only toggle via the info button; do not close on backdrop click or ESC
-                                // mode toggle: switches html.light-mode and swaps logo
-                                if (modeBtn){
-                                        const applyMode = (isLight)=>{
-                                                if (isLight) document.documentElement.classList.add('light-mode'); else document.documentElement.classList.remove('light-mode');
-                                                // do not swap logo; keep the same logo for both modes
-                                        };
-                                        // initialize from preference (optional)
-                                        const stored = localStorage.getItem('site-light-mode');
-                                        const isLightInitial = stored === '1';
-                                        applyMode(isLightInitial);
-                                        modeBtn.addEventListener('click', ()=>{
-                                                const isLight = !document.documentElement.classList.contains('light-mode');
-                                                applyMode(isLight);
-                                                localStorage.setItem('site-light-mode', isLight ? '1' : '0');
-                                        });
-                                }
+                
+                /*
+                const modeBtn = document.getElementById('mode-btn');
+                const siteLogo = document.querySelector('.site-logo');
+                // mode toggle: switches html.light-mode and swaps logo
+                if (modeBtn){
+                        const applyMode = (isLight)=>{
+                                if (isLight) document.documentElement.classList.add('light-mode'); else document.documentElement.classList.remove('light-mode');
+                                // do not swap logo; keep the same logo for both modes
+                        };
+                        // initialize from preference (optional)
+                        const stored = localStorage.getItem('site-light-mode');
+                        const isLightInitial = stored === '1';
+                        applyMode(isLightInitial);
+                        modeBtn.addEventListener('click', ()=>{
+                                const isLight = !document.documentElement.classList.contains('light-mode');
+                                applyMode(isLight);
+                                localStorage.setItem('site-light-mode', isLight ? '1' : '0');
+                        });
+                }
+                */
         })();
         </script>
         </body>
