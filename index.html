@@ -9,6 +9,37 @@
                         href="images/35A-Market-Logo-White.png">
                 <title>35A Market 2026</title>
         </head>
+        <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const video = document.getElementById("heroVideo");
+
+  if (!video) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+
+        if (entry.isIntersecting) {
+          video.play().catch((err) => {
+            console.log("Video autoplay blocked:", err);
+          });
+        } else {
+          video.pause();
+        }
+
+      });
+    },
+    {
+      threshold: 0.6
+    }
+  );
+
+  observer.observe(video);
+
+});
+</script>
+
         <body>
                 <img loading="lazy" src="images/35A-Market-Logo-White.png"
                         class="site-logo"
@@ -29,6 +60,20 @@
                         <div class="snap-item"><img loading="lazy"
                                         src="images/letter.jpg"
                                         alt="Letter"></div>
+
+                        <div class="video-item">
+                                <video
+                                        id="heroVideo"
+                                        autoplay
+                                        muted
+                                        playsinline
+                                        webkit-playsinline
+                                        preload="auto"
+                                        loop>
+                                        <source src="images/video-1.mp4"
+                                                type="video/mp4">
+                                </video>
+                        </div>
                         <div class="snap-item"><img loading="lazy"
                                         src="images/vendors_information.jpg"
                                         alt="Vendors information"></div>
@@ -36,26 +81,17 @@
                                         src="images/venue_details.jpg"
                                         alt="Venue details"></div>
                         <div class="snap-item extra-pad"><img loading="lazy"
-                                        src="images/event_photo/image1.JPG"
+                                        src="images/event_photo/image1.JPeG"
                                         alt="image 1"></div>
                         <div class="snap-item extra-pad"><img loading="lazy"
-                                        src="images/event_photo/image2.JPG"
+                                        src="images/event_photo/image2.JPeG"
                                         alt="image 2"></div>
                         <div class="snap-item extra-pad"><img loading="lazy"
                                         src="images/event_photo/image3.JPG"
                                         alt="image 3"></div>
                         <div class="snap-item extra-pad"><img loading="lazy"
-                                        src="images/event_photo/image4.JPG"
-                                        alt="image 4"></div>
-                        <div class="snap-item extra-pad"><img loading="lazy"
-                                        src="images/event_photo/image5.JPG"
-                                        alt="image 5"></div>
-                        <div class="snap-item extra-pad"><img loading="lazy"
-                                        src="images/event_photo/image6.JPG"
+                                        src="images/event_photo/image6.JPeG"
                                         alt="image 6"></div>
-                        <div class="snap-item extra-pad"><img loading="lazy"
-                                        src="images/event_photo/image7.JPG"
-                                        alt="image 7"></div>
                         <div class="snap-item extra-pad"><img loading="lazy"
                                         src="images/event_photo/image8.JPG"
                                         alt="image 8"></div>
@@ -64,9 +100,6 @@
                                         src="images/application_details.jpg"
                                         alt="Application details">
                         </div>
-                        <div class="snap-item extra-pad"><img loading="lazy"
-                                        src="images/event_photo/image9.JPG"
-                                        alt="image 9"></div>
 
                 </div>
                 <div id="scroll-progress" aria-hidden="true"></div>
@@ -111,8 +144,8 @@
                                                         rel="noopener noreferrer">Chat
                                                         on WhatsApp to
                                                         confirm</a></div>
-                                        </div>
                                 </div>
+                        </div>
                 </div>
 
                 <footer class="site-footer">
